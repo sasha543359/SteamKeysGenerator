@@ -18,9 +18,11 @@ namespace WindowsFormsApp1
 
         string SteamKey = string.Empty;
 
-        public string GenerateKeyPart()
+        Random random = new Random();
+        
+       string GenerateKeyPart()
         {
-            Random random = new Random();
+          
             string keyPart = string.Empty;
 
             for (int i = 0; i < 5; i++)
@@ -38,15 +40,49 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            textBox1.ScrollBars = ScrollBars.Vertical;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            listBox1.Items.Add(GenerateKeyPart());
+            SteamKey = string.Empty;
 
-          
+            if (checkBox1.Checked == false && checkBox2.Checked == false)
+                MessageBox.Show("Выбери хотябы один тип ключа");
+               
+
+            if (checkBox1.Checked == true && checkBox2.Checked != true)
+                    for (int i = 1; i <= numericUpDown1.Value ; i++)
+                    {
+                    SteamKey += $"{i}. {GenerateKeyPart()}-{GenerateKeyPart()}-{GenerateKeyPart()}\r\n";
+                    textBox1.Text = SteamKey;
+                    }
+
+          else if (checkBox2.Checked == true && checkBox1.Checked != true)
+                    for (int i = 1; i <= numericUpDown1.Value; i++)
+                    {
+                    SteamKey += $"{i}. {GenerateKeyPart()}-{GenerateKeyPart()}-{GenerateKeyPart()}-{GenerateKeyPart()}-{GenerateKeyPart()}\r\n";
+                    textBox1.Text = SteamKey;
+                    }
+         
+           
+
+
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }
